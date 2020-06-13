@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Login | America's Bank</title>
+
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" />
+	<link rel="stylesheet" th:href="@{/css/login.css}" href="../../static/css/login.css" />
+
+	<script th:src="@{/js/jquery-3.4.1.min.js}" src="../../static/js/jquery-3.4.1.min.js"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}" src="../../static/js/bootstrap.bundle.min.js"></script>
+	<script>
+		$(document).ready(function () {
+		});
+	</script>
+</head>
+
+<body class="d-flex flex-column h-100">
+	<header th:replace="fragments/header :: header">
+		<nav class="navbar navbar-light bg-white border-bottom box-shadow justify-content-center">
+			<a class="navbar-brand" href="/">America's Bank</a>
+		</nav>
+	</header>
+	<main role="main" class="flex-shrink-0">
+		<div class="container">
+			<form method="POST" class="form-signin" action="#" th:action="@{/user/login_process}"
+				th:object="${userForm}">
+				<h3 class="mb-5 text-center">Login</h3>
+				<div id="alert_block" th:if="${errorMsg} != null">
+					<div class="alert alert-danger" role="alert" th:text="${errorMsg}">
+						Error Message!!
+					</div>
+				</div>
+				<div id="alert_block" th:if="${alertMsg} != null">
+					<div class="alert alert-info" role="alert" th:text="${alertMsg}">
+						Alert Message!!
+					</div>
+				</div>
+				<div class="form-label-group">
+					<input type="text" class="form-control" id="inputUserName" name="username" placeholder="Username"
+						maxlength="16" th:field="*{username}" required autofocus>
+					<label for="inputUserName">Username</label>
+				</div>
+				<div class="form-label-group">
+					<input type="password" class="form-control" id="inputPassword" name="password"
+						placeholder="Password" maxlength="24" th:field="*{password}" required>
+					<label for="inputPassword">Password</label>
+
+				</div>
+				<div class="form-group row">
+					<div class="col">
+						<input type="checkbox" id="inputRememberMe" name="remember-me" />
+						<label for="inputRememberMe">Remember Me</label>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col">
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+					</div>
+				</div>
+				<div class="row">
+					<a class="card-link col-md-10" href="/user/forgot_credentials">Forgot your
+						username/password?</a>
+				</div>
+				<div class="row">
+					<a class="card-link col-md-12" href="#">Don’t have an online account? Sign up
+						now</a>
+				</div>
+			</form>
+		</div>
+	</main>
+	<footer class="footer mt-auto py-3 border-top" th:replace="fragments/footer :: footer">
+		<div class="container">
+			<span class="text-muted">&copy; 2020 - America's Bank</span>
+		</div>
+	</footer>
+</body>
+
+</html>

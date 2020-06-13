@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>America's Bank Online | America's Bank</title>
+
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" />
+	<link rel="stylesheet" th:href="@{/css/site.css}" href="../../static/css/site.css" />
+
+	<script th:src="@{/js/jquery-3.4.1.min.js}" src="../../static/js/jquery-3.4.1.min.js"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}" src="../../static/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/js/cleave.min.js}" src="../../static/js/cleave.min.js"></script>
+	<script th:src="@{/js/cleave-phone.us.js}" src="../../static/js/cleave-phone.us.js"></script>
+	<script>
+		$(document).ready(function () {
+			// Start
+			new Cleave('.ssn-input', {
+				blocks: [3, 2, 4],
+				delimiters: ['-', '-', '-'],
+				delimiterLazyShow: true,
+				numericOnly: true
+			});
+
+			new Cleave('.input-zipcode', {
+				blocks: [5],
+				numericOnly: true
+			});
+
+			new Cleave('.input-phone', {
+				prefix: '(',
+				noImmediatePrefix: true,
+				blocks: [4, 3, 4],
+				delimiters: [') ', '-', '-'],
+				numericOnly: true
+			});
+
+			$('.ssn-input').focusin(function () {
+				$(this).prop('type', 'text');
+			});
+			$('.ssn-input').focusout(function () {
+				$(this).prop('type', 'password');
+			});
+		});
+	</script>
+</head>
+
+<body class="d-flex flex-column h-100">
+	<header th:replace="fragments/header :: header">
+		<nav class="navbar navbar-light bg-white border-bottom box-shadow justify-content-center">
+			<a class="navbar-brand" href="/">America's Bank</a>
+		</nav>
+	</header>
+	<main role="main" class="bg-light flex-shrink-0">
+		<div class="container">
+			<div class="my-4 text-center">
+				<h2>Open your America's Bank Account</h2>
+				<p class="lead">Enter your personal information to sign up for your America's Bank account!</p>
+				<div id="alert_block" th:if="${errorMsg} != null">
+					<div class="alert alert-danger text-left" role="alert" th:text="${errorMsg}">
+						Error Message!!
+					</div>
+				</div>
+			</div>
+			<hr>
+			<form method="POST" action="#" th:action="@{/register/verify_customer}">
+				<h4 class="mb-3">Personal Information</h4>
+				<br>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputFirstName">First Name</label>
+						<input type="text" class="form-control" id="inputFirstName" placeholder="First name"
+							th:field="${customer.firstName}" maxlength="30" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputMiddleName">Middle Name (optional)</label>
+						<input type="text" class="form-control" id="inputMiddleName" placeholder="Middle name"
+							th:field="${customer.middleName}" maxlength="30">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputLastName">Last Name</label>
+						<input type="text" class="form-control" id="inputLastName" placeholder="Last name"
+							th:field="${customer.lastName}" maxlength="30" required>
+					</div>
+				</div>
+				<br>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputBirthDate">Birth Date</label>
+						<input type="date" class="form-control" id="inputBirthDate" placeholder="Birth Date"
+							th:max="${dateNow}" th:field="${customer.birthDate}" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputSSNNumber">SSN Number</label>
+						<input type="text" class="form-control ssn-input" id="inputSSNNumber"
+							placeholder="_ _ _ - _ _ - _ _ _ _" th:field="${customer.ssnNumber}" required>
+					</div>
+				</div>
+				<hr>
+				<h4 class="mb-3">Address</h4>
+				<br>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputStreetAddress">Street Address</label>
+						<input type="text" class="form-control" id="inputStreetAddress" placeholder="123 Main Street"
+							th:field="${address.streetAddress}" maxlength="45" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputAddress2">Address 2 (Optional)</label>
+						<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment or suite"
+							th:field="${address.streetAddress_2}" maxlength="30">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputCity">City</label>
+						<input type="text" class="form-control" id="inputCity" placeholder="City"
+							th:field="${address.city}" maxlength="30" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputState">State</label>
+						<select class="form-control" id="inputState" th:field="${address.state}"
+							th:insert="fragments/state_options :: state-options" required>
+							<option value="" selected>Choose a state</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputZipCode">Zip Code</label>
+						<input type="text" class="form-control input-zipcode" id="inputZipCode" placeholder="Zip Code"
+							th:field="${address.zipCode}" required>
+					</div>
+				</div>
+				<hr>
+				<h4 class="mb-3">Contact Information</h4>
+				<br>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputEmailAddress">Email Address</label>
+						<input type="email" class="form-control" id="inputEmailAddress" placeholder="your@email.com"
+							th:field="${customer.emailAddress}" maxlength="45" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputPhoneNumber">Phone Number</label>
+						<input type="text" class="form-control input-phone" id="inputPhoneNumber"
+							placeholder="( _ _ _ ) _ _ _-_ _ _ _" th:field="${customer.phoneNumber}" required>
+					</div>
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary" id="next_btn">Next</button>
+				<br>
+				<br>
+			</form>
+		</div>
+	</main>
+	<footer class="footer mt-auto py-3 border-top" th:replace="fragments/footer :: footer">
+		<div class="container">
+			<span class="text-muted">&copy; 2020 - America's Bank</span>
+		</div>
+	</footer>
+</body>
+
+</html>

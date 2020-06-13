@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>America's Bank Online | America's Bank</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/site.css}" href="../../static/css/site.css" />
+
+    <script th:src="@{/js/jquery-3.4.1.min.js}" src="../../static/js/jquery-3.4.1.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}" src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/cleave.min.js}" src="../../static/js/cleave.min.js"></script>
+    <script th:src="@{/js/cleave-phone.us.js}" src="../../static/js/cleave-phone.us.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Start
+        });
+    </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/header :: header">
+        <nav class="navbar navbar-light bg-white border-bottom box-shadow justify-content-center">
+            <a class="navbar-brand" href="/">America's Bank</a>
+        </nav>
+    </header>
+    <main role="main" class="bg-light flex-shrink-0">
+        <div class="container">
+            <div class="my-4 text-center">
+                <h2>Open your America's Bank Account</h2>
+                <p class="lead">Enter your personal information to sign up for your America's Bank account!</p>
+                <div id="alert_block" th:if="${errorMsg} != null">
+                    <div class="alert alert-danger text-left" role="alert" th:text="${errorMsg}">
+                        Error Message!!
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form method="POST" action="#" th:action="@{/register/register_account}">
+                <h4 class="mb-3">Account Information</h4>
+                <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inputAccountOptions" id="radioAccountChecking"
+                        th:field="${userAccount.accountType}" value="CHECKING" required>
+                    <label class="form-check-label" for="radioAccountChecking">America's Checking</label>
+                </div>
+                <div class="form-check form-check-inline mb-3">
+                    <input class="form-check-input" type="radio" name="inputAccountOptions" id="radioAccountSavings"
+                        th:field="${userAccount.accountType}" value="SAVINGS" required>
+                    <label class="form-check-label" for="radioAccountSavings">America's Savings</label>
+                </div>
+                <hr>
+                <h4 class="mb-3">User Account</h4>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputUserName">Username</label>
+                        <input type="text" class="form-control" id="inputUserName" placeholder="Enter a username"
+                            th:field="${userAccount.username}" maxlength="16" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter a password"
+                            th:field="${userAccount.password}" maxlength="24" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword2">Confirm Password</label>
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm password"
+                            th:field="${userAccount.password_confirm}" maxlength="24" required>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" id="submit_btn">Sign Up</button>
+                <br>
+                <br>
+            </form>
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3 border-top" th:replace="fragments/footer :: footer">
+        <div class="container">
+            <span class="text-muted">&copy; 2020 - America's Bank</span>
+        </div>
+    </footer>
+</body>
+
+</html>

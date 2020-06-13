@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>America's Bank Online | America's Bank</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/site.css}" href="../static/css/site.css" />
+    <style type="text/css">
+		@media (min-width: 0px) {
+		  .account-card {
+		    max-width: unset;
+		  }
+		}
+		
+		@media (min-width: 640px) {
+		  .account-card {
+		    max-width: 360px;
+		  }
+		}
+    </style>
+
+    <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}" src="../static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Start
+        });
+    </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/header_notsignedin :: header">
+        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" href="/">America's Bank</a>
+            </div>
+        </nav>
+    </header>
+    <main role="main" class="flex-shrink-0">
+        <div class="pricing-header px-3 py-3 pt-5 pb-4 mx-auto text-center">
+            <h1 class="display-4">Welcome to America's Bank</h1>
+            <h3 class="font-weight-normal">America's #1 Bank</h3>
+            <p class="lead">Sign up for a new account with us today!</p>
+        </div>
+        <div class="container">
+            <div class="card-deck mb-3 text-center justify-content-center">
+                <div class="card account-card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Checking</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li>A checking account</li>
+                            <li>No balance requirements</li>
+                            <li>Easy</li>
+                            <li>Free to sign up</li>
+                        </ul>
+                        <a class="btn btn-lg btn-block btn-primary" href="/register/account">Register now!</a>
+                    </div>
+                </div>
+                <div class="card account-card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Savings</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li>A savings account</li>
+                            <li>No balance requirements</li>
+                            <li>Easy</li>
+                            <li>Free to sign up</li>
+                        </ul>
+                        <a class="btn btn-lg btn-block btn-primary" href="/register/account">Register now!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="border-top footer text-muted" th:replace="fragments/footer :: footer">
+        <div class="container">
+            &copy; 2020 - America's Bank
+        </div>
+    </footer>
+</body>
+
+</html>

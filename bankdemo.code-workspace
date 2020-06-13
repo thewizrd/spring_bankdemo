@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "src\\main"
+		},
+		{
+			"name": "bankdemo",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.classpath": true,
+			"**/.project": true,
+			"**/.settings": true,
+			"**/.factorypath": true
+		}
+	}
+}

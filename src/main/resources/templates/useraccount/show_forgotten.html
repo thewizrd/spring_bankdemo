@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>America's Bank Online | America's Bank</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/userforgot.css}" href="../../static/css/userforgot.css" />
+
+    <script th:src="@{/js/jquery-3.4.1.min.js}" src="../../static/js/jquery-3.4.1.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}" src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Start
+        });
+    </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/header :: header">
+        <nav
+            class="navbar navbar-light bg-white border-bottom box-shadow justify-content-center">
+            <a class="navbar-brand" href="/">America's Bank</a>
+        </nav>
+    </header>
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <div class="card form-info" style="max-width: 360px;">
+                <h5 class="card-header">Login Information</h5>
+                <div class="card-body">
+                    <div class="card-text" th:if="${forgottenUsername != null}">
+                        Username: [[${forgottenUsername}]]
+                    </div>
+                    <div class="card-text" th:if="${forgottenPassword != null}">
+                        Password: [[${forgottenPassword}]]
+                    </div>
+                    <br>
+                    <a class="card-link" href="/user/login">Go to login</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3 border-top">
+        <div class="container">
+            <span class="text-muted">&copy; 2020 - America's Bank</span>
+        </div>
+    </footer>
+</body>
+
+</html>

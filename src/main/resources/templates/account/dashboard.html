@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>America's Bank Online | America's Bank</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/site.css}" href="../../static/css/site.css" />
+
+    <script th:src="@{/js/jquery-3.4.1.min.js}" src="../../static/js/jquery-3.4.1.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}" src="../../static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Start
+        });
+    </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/header_signedin :: header">
+        <nav class="navbar navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" href="/">America's Bank</a>
+            </div>
+        </nav>
+    </header>
+    <main role="main" class="flex-shrink-0">
+	    <div class="container">
+	        <div class="text-left pb-3">
+	            <h3>Accounts</h3>
+	        </div>
+	        <div th:if="${accounts == null}">
+	            <p>No accounts available. Please open a checking or savings account.</p>
+	        </div>
+	        <div th:if="${accounts != null}">
+	            <div th:each="acc : ${accounts}">
+	                <div class="card">
+	                    <div class="card-body container">
+	                        <div class="row">
+	                            <div class="col-sm text-left font-weight-bold align-self-center">
+	                                <span th:if="${acc.accountType.name() == 'CHECKING'}">Checking</span>
+	                                <span th:if="${acc.accountType.name() == 'SAVINGS'}">Savings</span>
+	                                <span>(...[[${#strings.substring(acc.accountIdFormatted, 5)}]])</span>
+	                            </div>
+	                            <div class="col-sm align-self-center text-right">
+	                            	<div class="row">
+	                            		<div class="col" th:text="${#numbers.formatCurrency(acc.accountBalance)}">$</div>
+	                            	</div>
+	                            	<div class="row">
+	                            		<div class="col text-secondary">Account Balance</div>
+	                            	</div>
+	                            </div>
+	                    	</div>
+	                    </div>
+	                    <div class="card-footer">
+	                    	<div class="row text-center">
+	                    		<div class="col">
+	                    			<a class="card-link" href="#">View Transactions</a>
+	                    		</div>
+	                    		<div class="col">
+	                    			<a class="card-link" href="#">Transfer</a>
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </main>
+    <footer class="footer mt-auto py-3 border-top" th:replace="fragments/footer :: footer">
+        <div class="container">
+            &copy; 2020 - America's Bank
+        </div>
+    </footer>
+</body>
+
+</html>
